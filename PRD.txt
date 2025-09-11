@@ -1,0 +1,152 @@
+
+⸻
+
+PRD – Stock Price Forecasting with GAN & Twitter Sentiment Analysis
+
+1. Goal & Problem Statement
+
+Build an end-to-end pipeline that forecasts Amazon (AMZN) stock price using:
+	•	Real-time Twitter sentiment signals
+	•	Historical technical indicators
+	•	GAN-based deep learning models for robust price forecasting
+
+The goal is to reduce forecasting error and demonstrate integration of NLP, quantitative finance, and generative models in one automated system.
+
+⸻
+
+2. Scope
+
+2.1 In-Scope
+	•	Data ingestion: Twitter API + Yahoo Finance (yfinance)
+	•	Sentiment analysis (VADER/TextBlob)
+	•	Feature engineering with technical indicators (EMA, SMA, MACD, Bollinger Bands)
+	•	GAN-based forecasting model (TensorFlow/Keras or PyTorch)
+	•	Evaluation (MAPE, RMSE, direction accuracy)
+	•	Visualization & dashboards (Matplotlib, Plotly)
+	•	Modular Python package with Jupyter Notebook experiments
+
+2.2 Out-of-Scope
+	•	General stock market predictions (only AMZN)
+	•	Deployment to production trading systems
+	•	Risk/portfolio optimization
+
+⸻
+
+3. System Architecture
+
+Pipeline Components
+	1.	Data Collection Layer
+	•	Fetch real-time tweets (Twitter API v2, keyword: AMZN, $AMZN, Amazon)
+	•	Fetch stock OHLCV data (yfinance, 1m–1d granularity)
+	2.	Sentiment Analysis Layer
+	•	Preprocess tweets: tokenization, lemmatization, stopword/emoji/hashtag removal
+	•	Extract sentiment scores (VADER compound, TextBlob polarity)
+	•	Generate rolling Sentiment Index
+	3.	Feature Engineering Layer
+	•	Technical indicators: EMA, SMA, MACD, Bollinger Bands (TA-Lib)
+	•	Merge with sentiment index
+	•	Normalize/scaling features
+	4.	Forecasting Model Layer
+	•	GAN model: Generator + Discriminator architecture
+	•	Generator predicts next-step stock price sequence
+	•	Discriminator validates realism of generated sequences
+	•	Optimized with Adam optimizer + dropout
+	5.	Evaluation Layer
+	•	Metrics: MAPE, RMSE, directional accuracy
+	•	Benchmark vs. LSTM/ARIMA baseline
+	6.	Visualization & Reporting
+	•	Plot predicted vs actual stock price
+	•	Plot sentiment vs stock trend correlation
+
+⸻
+
+4. Technical Requirements
+
+4.1 Programming & Libraries
+	•	Language: Python 3.11
+	•	Data Handling: Pandas, NumPy
+	•	NLP: NLTK, VADER, TextBlob
+	•	Deep Learning: TensorFlow/Keras + PyTorch (for GAN variants)
+	•	Finance: yfinance, TA-Lib
+	•	Visualization: Matplotlib, Seaborn, Plotly
+	•	Utilities: Scikit-learn (scaling, evaluation)
+
+4.2 Infrastructure
+	•	Local Jupyter Notebook experimentation
+	•	GitHub for version control (repo: StockPriceData)
+	•	Optional: Docker for reproducibility
+
+⸻
+
+5. Milestones & Deliverables
+
+Milestone 1 – Data Pipeline
+	•	✅ Scripts to fetch tweets + stock data
+	•	✅ Preprocessing pipeline for sentiment analysis
+	•	✅ Sentiment index generator
+
+Milestone 2 – Feature Engineering
+	•	✅ Compute technical indicators
+	•	✅ Merge sentiment + stock data into hybrid feature set
+	•	✅ Train/test split
+
+Milestone 3 – GAN Model
+	•	✅ Implement Generator + Discriminator
+	•	✅ Train on hybrid features
+	•	✅ Optimize with Adam/dropout
+	•	✅ Achieve <5% MAPE
+
+Milestone 4 – Evaluation & Reporting
+	•	✅ Compare vs baseline models
+	•	✅ Generate performance dashboards
+	•	✅ Document pipeline
+
+⸻
+
+6. Success Metrics
+	•	Sentiment index correlates positively (>0.4) with price movement
+	•	Forecasting error (MAPE) ≤ 4%
+	•	Directional accuracy ≥ 65%
+	•	End-to-end pipeline runs automatically on live data
+
+⸻
+
+7. Risks & Mitigations
+	•	Risk: Twitter API rate limits
+	•	Mitigation: Cache tweets, use batch pulls
+	•	Risk: GAN instability in training
+	•	Mitigation: Gradient clipping, tuned learning rates
+	•	Risk: Data noise from Twitter
+	•	Mitigation: Stronger NLP preprocessing, rolling sentiment averaging
+
+⸻
+
+8. Deliverables for Claude Code
+
+Claude should:
+	1.	Set up repo structure:
+
+/src  
+  /data_pipeline  
+  /sentiment  
+  /features  
+  /models  
+  /evaluation  
+  /visualization  
+notebooks/  
+README.md  
+requirements.txt  
+
+
+	2.	Generate code modules:
+	•	twitter_fetch.py (stream tweets)
+	•	stock_fetch.py (yfinance data)
+	•	sentiment.py (VADER/TextBlob pipeline)
+	•	features.py (technical indicators + merge)
+	•	gan_model.py (Generator + Discriminator)
+	•	train.py (training loop)
+	•	evaluate.py (MAPE, RMSE, plots)
+	3.	Provide Jupyter notebooks for experimentation
+	4.	Write documentation with usage examples
+
+⸻
